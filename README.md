@@ -3,23 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ንጋት የዜማ መሳሪያዎች | Nigat Melody Instruments</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
+    <title>ንጋት የዜማ መሳሪያዎች | Nigat Melody</title>
     <style>
         :root {
-            --primary-gold: #d4af37;
-            --glass-bg: rgba(0, 0, 0, 0.6); /* Slightly darker glass for image backgrounds */
-            --text-light: #f4f4f4;
-            --accent-orange: #ff4d00;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --glass: rgba(0, 0, 0, 0.75);
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-light);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #000;
+            color: var(--white);
             overflow-x: hidden;
-            
-            /* --- 1. MAIN BODY BACKGROUND PHOTO --- */
+        }
+
+        /* Full Screen Background Image */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            /* REPLACE 'background.jpg' with your actual image file */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* --- PAGE 1: WELCOME --- */
+        #welcome-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+
+        .welcome-title {
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        }
+
+        .welcome-sub {
+            font-size: 1.5rem;
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .enter-btn {
+            padding: 15px 40px;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.4s;
+            border-radius: 50px;
+            text-transform: uppercase;
+        }
+
+        .enter-btn:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        /* --- PAGE 2: LINKS & CATALOG --- */
+        #links-page {
+            min-height: 100vh;
+            display: none; /* Hidden initially */
+            padding: 40px 20px;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .glass-box {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--gold);
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .instrument-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .inst-item {
+            text-align: center;
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .inst-item:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .inst-img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+        }
+
+        .link-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .link-card:hover {
+            background: rgba(255,255,255,0.1);
+            padding-left: 30px;
+        }
+
+        .order-tag {
+            color: #ff4d00;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Animations */
+        .fade-out { transform: translateY(-100vh); }
+        .show-page { display: block !important; opacity: 1 !important; }
+
+        @media (max-width: 600px) {
+            .welcome-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-container"></div>
+
+    <section id="welcome-page">
+        <h1 class="welcome-title">ንጋት ዜማ</h1>
+        <p class="welcome-sub">NIGAT MELODY</p>
+        <button class="enter-btn"
             /* REPLACE 'header-background.jpg' WITH YOUR OWN BACKGROUND IMAGE URL */
             background-image: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(38,38,38,0.9) 100%), 
                               url('header-background.jpg');
